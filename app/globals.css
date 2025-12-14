@@ -97,12 +97,16 @@ body {
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
+
   33% {
     transform: translate(30px, -30px) scale(1.1);
   }
+
   66% {
     transform: translate(-20px, 20px) scale(0.9);
   }
@@ -126,6 +130,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -173,12 +178,16 @@ body {
 }
 
 @keyframes shake {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateX(0);
   }
+
   25% {
     transform: translateX(-10px);
   }
+
   75% {
     transform: translateX(10px);
   }
@@ -309,6 +318,7 @@ body {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -406,6 +416,7 @@ li {
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -564,12 +575,209 @@ div[style*="display"]:hover {
   font-weight: 500 !important;
   padding: 0.5rem 1.25rem !important;
   transition: all 0.3s ease !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
 }
 
 .main-nav-button:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
 }
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 14px 20px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.todo-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn.edit {
+  background: linear-gradient(135deg, #6a5acd, #7b68ee);
+}
+
+.btn.delete {
+  background: linear-gradient(135deg, #ff4d4f, #ff7875);
+}
+
+.btn.complete {
+  background: linear-gradient(135deg, #52c41a, #73d13d);
+}
+
+.add-todo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.add-todo-input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 15px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-todo-input:focus {
+  border-color: #6a5acd;
+  box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.2);
+}
+
+.add-todo-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(135deg, #6a5acd, #7b68ee);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.add-todo-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.add-todo-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.admin-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.admin-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #6a5acd;
+  margin-bottom: 24px;
+}
+
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.user-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+}
+
+.user-email {
+  font-weight: 500;
+}
+
+.user-role {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.user-role.admin {
+  background: rgba(106, 90, 205, 0.15);
+  color: #6a5acd;
+}
+
+.user-role.user {
+  background: rgba(0, 0, 0, 0.08);
+  color: #444;
+}
+
+.user-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.role-btn {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(135deg, #6a5acd, #7b68ee);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.role-btn.secondary {
+  background: linear-gradient(135deg, #8e8e8e, #6e6e6e);
+}
+
+.role-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.role-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+
 
 @media (max-width: 768px) {
   .main-nav-content {

@@ -13,7 +13,7 @@ export default function Add() {
       <h2>Added Todos</h2>
       <ul>
         {todos
-          .filter((t: any) => t.status === "active")
+          .filter((t: any) => t.status === "ACTIVE")
           .map((t: any) => (
             <li key={t._id}>{t.title}</li>
           ))}

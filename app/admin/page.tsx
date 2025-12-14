@@ -18,15 +18,40 @@ export default function AdminPage() {
   };
 
   return (
-    <>
-      <h2>Admin User Management</h2>
-      {users.map(u => (
-        <div key={u._id}>
-          {u.email} — {u.role}
-          <Button onClick={() => updateRole(u._id, "ADMIN")}>Make Admin</Button>
-          <Button onClick={() => updateRole(u._id, "USER")}>Make User</Button>
+<div className="admin-container">
+  <h2 className="admin-title">Admin User Management</h2>
+
+  <div className="user-list">
+    {users.map((u) => (
+      <div key={u._id} className="user-card">
+        <div className="user-info">
+          <span className="user-email">{u.email}</span>
+          <span className={`user-role ${u.role.toLowerCase()}`}>
+            {u.role}
+          </span>
         </div>
-      ))}
-    </>
+
+        <div className="user-actions">
+          <button
+            className="role-btn"
+            onClick={() => updateRole(u._id, "ADMIN")}
+            disabled={u.role === "ADMIN"}
+          >
+            Make Admin
+          </button>
+
+          <button
+            className="role-btn secondary"
+            onClick={() => updateRole(u._id, "USER")}
+            disabled={u.role === "USER"}
+          >
+            Make User
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
   );
 }

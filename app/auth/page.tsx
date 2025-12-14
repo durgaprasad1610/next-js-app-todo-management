@@ -10,10 +10,11 @@ export default function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   // Check for error from URL (NextAuth redirects)
   useEffect(() => {
     const urlError = searchParams?.get("error");
@@ -45,11 +46,12 @@ export default function AuthPage() {
           // Small delay to ensure session is set
           await new Promise((resolve) => setTimeout(resolve, 200));
           router.push(callbackUrl);
+          setSuccess('Login successful')
           router.refresh(); // Refresh to update session
         } else {
           console.error("❌ Login error:", res?.error);
-          const errorMessage = res?.error === "CredentialsSignin" 
-            ? "Invalid email or password" 
+          const errorMessage = res?.error === "CredentialsSignin"
+            ? "Invalid email or password"
             : res?.error || "Login failed. Please try again.";
           setError(errorMessage);
         }
@@ -60,28 +62,11 @@ export default function AuthPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
         });
-
         if (res.ok) {
-          // After registration, automatically sign in
-          const signInRes = await signIn("credentials", {
-            email: email.toLowerCase().trim(),
-            password,
-            redirect: false,
-          });
-
-          console.log("Auto-signin after registration:", signInRes);
-
-          if (!signInRes?.error && signInRes?.ok) {
-            // Successfully logged in after registration
-            console.log("✅ Auto-login successful after registration, redirecting...");
-            await new Promise((resolve) => setTimeout(resolve, 200));
-            router.push("/");
-            router.refresh(); // Refresh to update session
-          } else {
-            console.error("❌ Auto-signin error:", signInRes?.error);
-            setError("Account created successfully! Please login with your credentials.");
-            setIsLogin(true);
-          }
+          router.push("/auth");
+          setSuccess("Account created successfully! Please login with your credentials.");
+          setIsLogin(true);
+          router.refresh(); // Refresh to update session
         } else {
           const data = await res.json();
           setError(data.error || "Error occurred. Please try again.");
@@ -126,6 +111,15 @@ export default function AuthPage() {
         {error && (
           <Alert severity="error" className="auth-alert" onClose={() => setError("")}>
             {error}
+          </Alert>
+        )}
+        {success && (
+          <Alert
+            severity="success"
+            className="auth-alert"
+            onClose={() => setSuccess("")}
+          >
+            {success}
           </Alert>
         )}
 

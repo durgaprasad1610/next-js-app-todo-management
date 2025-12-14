@@ -7,7 +7,7 @@ import { AdminPanelSettings, Logout, Home } from "@mui/icons-material";
 
 export default function Main() {
   const { data, status } = useSession();
-  const pathname = usePathname();
+    const pathname = usePathname();
 
   // Don't show on auth pages or if not authenticated
   if (pathname?.startsWith("/auth") || status !== "authenticated") {
@@ -34,7 +34,11 @@ export default function Main() {
         )}
 
         <Button
-          onClick={() => signOut()}
+          onClick={() =>
+            signOut({
+              callbackUrl: "/auth",
+            })
+          }
           className="main-nav-button"
           startIcon={<Logout />}
           variant="outlined"
