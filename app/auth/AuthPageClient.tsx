@@ -6,6 +6,7 @@ import { TextField, Button, Box, Typography, Alert, CircularProgress, InputAdorn
 import { Email, Lock, PersonAdd, Login } from "@mui/icons-material";
 
 export default function AuthPage() {
+    const [mounted, setMounted] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -14,6 +15,18 @@ export default function AuthPage() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+        const urlError = searchParams?.get("error");
+        if (urlError) {
+            setError("Authentication failed. Please try again.");
+        }
+    }, [mounted, searchParams]);
 
     // Check for error from URL (NextAuth redirects)
     useEffect(() => {
@@ -84,6 +97,8 @@ export default function AuthPage() {
             submit();
         }
     };
+
+    if (!mounted) return null;
 
     return (
         <Box className="auth-container">
