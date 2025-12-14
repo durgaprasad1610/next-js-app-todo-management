@@ -45,23 +45,7 @@ export async function POST(req: Request) {
       password: hashed,
       role: "USER" as const, // Default role
     };
-
-    console.log("📝 Creating user in database:", {
-      email: userData.email,
-      role: userData.role,
-      database: mongoose.connection.db?.databaseName,
-    });
-
     const user = await User.create(userData);
-
-    console.log("✅ User created successfully in database:", {
-      id: user._id,
-      email: user.email,
-      role: user.role,
-      createdAt: user.createdAt,
-      database: mongoose.connection.db?.databaseName,
-      collection: User.collection.name,
-    });
 
     // Return success response (don't send password back)
     return NextResponse.json(

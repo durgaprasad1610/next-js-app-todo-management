@@ -49,11 +49,7 @@ export default function AuthPage() {
                     redirect: false,
                 });
 
-                console.log("SignIn response:", res);
-
                 if (!res?.error && res?.ok) {
-                    // Successfully logged in
-                    console.log("✅ Login successful, redirecting...");
                     // Get callback URL or default to home
                     const callbackUrl = searchParams?.get("callbackUrl") || "/";
                     // Small delay to ensure session is set

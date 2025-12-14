@@ -27,7 +27,6 @@ export const authOptions = {
           }
 
           const email = credentials.email.toLowerCase().trim();
-          console.log("🔍 Looking for user with email:", email);
 
           const user = await User.findOne({ email });
           
@@ -35,8 +34,6 @@ export const authOptions = {
             console.error("❌ User not found:", email);
             return null;
           }
-
-          console.log("✅ User found:", user.email);
 
           const valid = await bcrypt.compare(
             credentials.password,
@@ -47,8 +44,6 @@ export const authOptions = {
             console.error("❌ Invalid password for user:", email);
             return null;
           }
-
-          console.log("✅ Password valid, returning user data");
 
           return {
             id: user._id.toString(),
